@@ -1,0 +1,297 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="600" height="600">
+  <defs>
+    <!-- Gradient for nodes -->
+    <radialGradient id="nodeGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#7dd3fc" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#0284c7" stop-opacity="0.8"/>
+    </radialGradient>
+
+    <!-- Accent node gradient (orange/amber) -->
+    <radialGradient id="nodeAccent" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#fdba74" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#ea580c" stop-opacity="0.9"/>
+    </radialGradient>
+
+    <!-- Center hub gradient -->
+    <radialGradient id="hubGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#a78bfa" stop-opacity="1"/>
+      <stop offset="60%" stop-color="#7c3aed" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#5b21b6" stop-opacity="0.8"/>
+    </radialGradient>
+
+    <!-- Background gradient -->
+    <radialGradient id="bgGrad" cx="50%" cy="50%" r="60%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#020617"/>
+    </radialGradient>
+
+    <!-- Glow filter -->
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+
+    <!-- Stronger glow for hub -->
+    <filter id="hubGlowFilter" x="-80%" y="-80%" width="260%" height="260%">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+
+    <!-- Edge glow -->
+    <filter id="edgeGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+
+    <!-- Text shadow -->
+    <filter id="textGlow" x="-10%" y="-10%" width="120%" height="120%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+
+    <!-- Ripple circle clip -->
+    <clipPath id="circleClip">
+      <circle cx="300" cy="260" r="180"/>
+    </clipPath>
+  </defs>
+
+  <!-- Background -->
+  <rect width="600" height="600" fill="url(#bgGrad)" rx="30"/>
+
+  <!-- Subtle grid pattern -->
+  <g opacity="0.04" stroke="#7dd3fc" stroke-width="0.5">
+    <line x1="100" y1="0" x2="100" y2="600"/>
+    <line x1="200" y1="0" x2="200" y2="600"/>
+    <line x1="300" y1="0" x2="300" y2="600"/>
+    <line x1="400" y1="0" x2="400" y2="600"/>
+    <line x1="500" y1="0" x2="500" y2="600"/>
+    <line x1="0" y1="100" x2="600" y2="100"/>
+    <line x1="0" y1="200" x2="600" y2="200"/>
+    <line x1="0" y1="300" x2="600" y2="300"/>
+    <line x1="0" y1="400" x2="600" y2="400"/>
+    <line x1="0" y1="500" x2="600" y2="500"/>
+  </g>
+
+  <!-- Ripple rings from center -->
+  <circle cx="300" cy="260" r="60" fill="none" stroke="#7c3aed" stroke-width="1" opacity="0">
+    <animate attributeName="r" values="40;180" dur="3s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.5;0" dur="3s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="300" cy="260" r="60" fill="none" stroke="#7c3aed" stroke-width="1" opacity="0">
+    <animate attributeName="r" values="40;180" dur="3s" begin="1s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.5;0" dur="3s" begin="1s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="300" cy="260" r="60" fill="none" stroke="#7c3aed" stroke-width="1" opacity="0">
+    <animate attributeName="r" values="40;180" dur="3s" begin="2s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.5;0" dur="3s" begin="2s" repeatCount="indefinite"/>
+  </circle>
+
+  <!-- ═══════════════ EDGES ═══════════════ -->
+  <g filter="url(#edgeGlow)">
+    <!-- Hub to outer nodes -->
+    <!-- Hub(300,260) -> Node1(160,140) -->
+    <line x1="300" y1="260" x2="160" y2="140" stroke="#7dd3fc" stroke-width="2" opacity="0.4">
+      <animate attributeName="opacity" values="0.2;0.6;0.2" dur="4s" repeatCount="indefinite"/>
+    </line>
+    <!-- Hub -> Node2(440,140) -->
+    <line x1="300" y1="260" x2="440" y2="140" stroke="#7dd3fc" stroke-width="2" opacity="0.4">
+      <animate attributeName="opacity" values="0.2;0.6;0.2" dur="4s" begin="0.5s" repeatCount="indefinite"/>
+    </line>
+    <!-- Hub -> Node3(480,280) -->
+    <line x1="300" y1="260" x2="480" y2="280" stroke="#fdba74" stroke-width="2" opacity="0.4">
+      <animate attributeName="opacity" values="0.2;0.7;0.2" dur="3.5s" begin="0.3s" repeatCount="indefinite"/>
+    </line>
+    <!-- Hub -> Node4(420,400) -->
+    <line x1="300" y1="260" x2="420" y2="400" stroke="#7dd3fc" stroke-width="2" opacity="0.4">
+      <animate attributeName="opacity" values="0.2;0.6;0.2" dur="4s" begin="1s" repeatCount="indefinite"/>
+    </line>
+    <!-- Hub -> Node5(180,400) -->
+    <line x1="300" y1="260" x2="180" y2="400" stroke="#7dd3fc" stroke-width="2" opacity="0.4">
+      <animate attributeName="opacity" values="0.2;0.6;0.2" dur="4s" begin="1.5s" repeatCount="indefinite"/>
+    </line>
+    <!-- Hub -> Node6(120,280) -->
+    <line x1="300" y1="260" x2="120" y2="280" stroke="#fdba74" stroke-width="2" opacity="0.4">
+      <animate attributeName="opacity" values="0.2;0.7;0.2" dur="3.5s" begin="0.8s" repeatCount="indefinite"/>
+    </line>
+
+    <!-- Inter-node edges (ring) -->
+    <line x1="160" y1="140" x2="440" y2="140" stroke="#7dd3fc" stroke-width="1.2" opacity="0.2">
+      <animate attributeName="opacity" values="0.1;0.35;0.1" dur="5s" repeatCount="indefinite"/>
+    </line>
+    <line x1="440" y1="140" x2="480" y2="280" stroke="#7dd3fc" stroke-width="1.2" opacity="0.2">
+      <animate attributeName="opacity" values="0.1;0.35;0.1" dur="5s" begin="0.8s" repeatCount="indefinite"/>
+    </line>
+    <line x1="480" y1="280" x2="420" y2="400" stroke="#7dd3fc" stroke-width="1.2" opacity="0.2">
+      <animate attributeName="opacity" values="0.1;0.35;0.1" dur="5s" begin="1.6s" repeatCount="indefinite"/>
+    </line>
+    <line x1="420" y1="400" x2="180" y2="400" stroke="#7dd3fc" stroke-width="1.2" opacity="0.2">
+      <animate attributeName="opacity" values="0.1;0.35;0.1" dur="5s" begin="2.4s" repeatCount="indefinite"/>
+    </line>
+    <line x1="180" y1="400" x2="120" y2="280" stroke="#7dd3fc" stroke-width="1.2" opacity="0.2">
+      <animate attributeName="opacity" values="0.1;0.35;0.1" dur="5s" begin="3.2s" repeatCount="indefinite"/>
+    </line>
+    <line x1="120" y1="280" x2="160" y2="140" stroke="#7dd3fc" stroke-width="1.2" opacity="0.2">
+      <animate attributeName="opacity" values="0.1;0.35;0.1" dur="5s" begin="4s" repeatCount="indefinite"/>
+    </line>
+
+    <!-- Cross edges -->
+    <line x1="160" y1="140" x2="420" y2="400" stroke="#a78bfa" stroke-width="1" opacity="0.15">
+      <animate attributeName="opacity" values="0.08;0.25;0.08" dur="6s" repeatCount="indefinite"/>
+    </line>
+    <line x1="440" y1="140" x2="180" y2="400" stroke="#a78bfa" stroke-width="1" opacity="0.15">
+      <animate attributeName="opacity" values="0.08;0.25;0.08" dur="6s" begin="2s" repeatCount="indefinite"/>
+    </line>
+    <line x1="120" y1="280" x2="480" y2="280" stroke="#a78bfa" stroke-width="1" opacity="0.15">
+      <animate attributeName="opacity" values="0.08;0.25;0.08" dur="6s" begin="4s" repeatCount="indefinite"/>
+    </line>
+  </g>
+
+  <!-- ═══════════════ TRAVELING PARTICLES ═══════════════ -->
+  <!-- Particle along Hub->Node1 -->
+  <circle r="3" fill="#7dd3fc" opacity="0.9">
+    <animateMotion dur="2.5s" repeatCount="indefinite" path="M300,260 L160,140"/>
+    <animate attributeName="opacity" values="0;1;1;0" dur="2.5s" repeatCount="indefinite"/>
+  </circle>
+  <!-- Particle along Hub->Node3 -->
+  <circle r="3" fill="#fdba74" opacity="0.9">
+    <animateMotion dur="2s" begin="0.7s" repeatCount="indefinite" path="M300,260 L480,280"/>
+    <animate attributeName="opacity" values="0;1;1;0" dur="2s" begin="0.7s" repeatCount="indefinite"/>
+  </circle>
+  <!-- Particle along Hub->Node5 -->
+  <circle r="3" fill="#7dd3fc" opacity="0.9">
+    <animateMotion dur="2.2s" begin="1.4s" repeatCount="indefinite" path="M300,260 L180,400"/>
+    <animate attributeName="opacity" values="0;1;1;0" dur="2.2s" begin="1.4s" repeatCount="indefinite"/>
+  </circle>
+  <!-- Particle along ring Node2->Node3 -->
+  <circle r="2.5" fill="#a78bfa" opacity="0.8">
+    <animateMotion dur="3s" begin="0.3s" repeatCount="indefinite" path="M440,140 L480,280"/>
+    <animate attributeName="opacity" values="0;0.8;0.8;0" dur="3s" begin="0.3s" repeatCount="indefinite"/>
+  </circle>
+  <!-- Particle along ring Node4->Node5 -->
+  <circle r="2.5" fill="#a78bfa" opacity="0.8">
+    <animateMotion dur="3s" begin="1.8s" repeatCount="indefinite" path="M420,400 L180,400"/>
+    <animate attributeName="opacity" values="0;0.8;0.8;0" dur="3s" begin="1.8s" repeatCount="indefinite"/>
+  </circle>
+  <!-- Reverse particle Node6->Hub -->
+  <circle r="2.5" fill="#fdba74" opacity="0.8">
+    <animateMotion dur="2s" begin="2.2s" repeatCount="indefinite" path="M120,280 L300,260"/>
+    <animate attributeName="opacity" values="0;0.9;0.9;0" dur="2s" begin="2.2s" repeatCount="indefinite"/>
+  </circle>
+
+  <!-- ═══════════════ NODES ═══════════════ -->
+  <!-- Node 1 (top-left) -->
+  <g filter="url(#glow)">
+    <circle cx="160" cy="140" r="14" fill="url(#nodeGlow)">
+      <animate attributeName="r" values="12;16;12" dur="3s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+
+  <!-- Node 2 (top-right) -->
+  <g filter="url(#glow)">
+    <circle cx="440" cy="140" r="14" fill="url(#nodeGlow)">
+      <animate attributeName="r" values="12;16;12" dur="3s" begin="0.5s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+
+  <!-- Node 3 (right) – accent -->
+  <g filter="url(#glow)">
+    <circle cx="480" cy="280" r="14" fill="url(#nodeAccent)">
+      <animate attributeName="r" values="11;15;11" dur="2.8s" begin="0.2s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+
+  <!-- Node 4 (bottom-right) -->
+  <g filter="url(#glow)">
+    <circle cx="420" cy="400" r="14" fill="url(#nodeGlow)">
+      <animate attributeName="r" values="12;16;12" dur="3s" begin="1s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+
+  <!-- Node 5 (bottom-left) -->
+  <g filter="url(#glow)">
+    <circle cx="180" cy="400" r="14" fill="url(#nodeGlow)">
+      <animate attributeName="r" values="12;16;12" dur="3s" begin="1.5s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+
+  <!-- Node 6 (left) – accent -->
+  <g filter="url(#glow)">
+    <circle cx="120" cy="280" r="14" fill="url(#nodeAccent)">
+      <animate attributeName="r" values="11;15;11" dur="2.8s" begin="0.7s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+
+  <!-- ═══════════════ CENTER HUB ═══════════════ -->
+  <g filter="url(#hubGlowFilter)">
+    <circle cx="300" cy="260" r="30" fill="url(#hubGlow)">
+      <animate attributeName="r" values="28;34;28" dur="2.5s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+  <!-- Inner bright core -->
+  <circle cx="300" cy="260" r="12" fill="#c4b5fd" opacity="0.6">
+    <animate attributeName="r" values="10;14;10" dur="2.5s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.4;0.8;0.4" dur="2.5s" repeatCount="indefinite"/>
+  </circle>
+
+  <!-- ═══════════════ SMALL SATELLITE DOTS ═══════════════ -->
+  <circle cx="230" cy="170" r="4" fill="#7dd3fc" opacity="0.5">
+    <animate attributeName="opacity" values="0.3;0.7;0.3" dur="2s" repeatCount="indefinite"/>
+    <animate attributeName="r" values="3;5;3" dur="2s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="380" cy="190" r="4" fill="#a78bfa" opacity="0.5">
+    <animate attributeName="opacity" values="0.3;0.7;0.3" dur="2.3s" begin="0.5s" repeatCount="indefinite"/>
+    <animate attributeName="r" values="3;5;3" dur="2.3s" begin="0.5s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="350" cy="350" r="4" fill="#fdba74" opacity="0.5">
+    <animate attributeName="opacity" values="0.3;0.7;0.3" dur="2.1s" begin="1s" repeatCount="indefinite"/>
+    <animate attributeName="r" values="3;5;3" dur="2.1s" begin="1s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="220" cy="340" r="4" fill="#7dd3fc" opacity="0.5">
+    <animate attributeName="opacity" values="0.3;0.7;0.3" dur="2.4s" begin="1.5s" repeatCount="indefinite"/>
+    <animate attributeName="r" values="3;5;3" dur="2.4s" begin="1.5s" repeatCount="indefinite"/>
+  </circle>
+
+  <!-- Faint connecting lines for satellites -->
+  <line x1="230" y1="170" x2="300" y2="260" stroke="#7dd3fc" stroke-width="0.5" opacity="0.15"/>
+  <line x1="380" y1="190" x2="300" y2="260" stroke="#a78bfa" stroke-width="0.5" opacity="0.15"/>
+  <line x1="350" y1="350" x2="300" y2="260" stroke="#fdba74" stroke-width="0.5" opacity="0.15"/>
+  <line x1="220" y1="340" x2="300" y2="260" stroke="#7dd3fc" stroke-width="0.5" opacity="0.15"/>
+
+  <!-- ═══════════════ TEXT ═══════════════ -->
+  <!-- "network" in light weight -->
+  <g filter="url(#textGlow)">
+    <text x="300" y="510" text-anchor="middle" font-family="'SF Pro Display', 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif" font-size="56" font-weight="300" letter-spacing="3" fill="#e2e8f0">
+      network
+      <animate attributeName="opacity" values="0;1" dur="1.5s" fill="freeze"/>
+    </text>
+  </g>
+
+  <!-- "XR" in bold accent -->
+  <g filter="url(#textGlow)">
+    <text x="300" y="568" text-anchor="middle" font-family="'SF Pro Display', 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif" font-size="64" font-weight="800" letter-spacing="8" fill="url(#hubGlow)">
+      XR
+      <animate attributeName="opacity" values="0;1" dur="1.5s" begin="0.3s" fill="freeze"/>
+    </text>
+  </g>
+
+  <!-- Version badge -->
+  <g opacity="0">
+    <animate attributeName="opacity" values="0;0.6" dur="1s" begin="1s" fill="freeze"/>
+    <rect x="258" y="575" width="84" height="22" rx="11" fill="none" stroke="#7c3aed" stroke-width="1" opacity="0.5"/>
+    <text x="300" y="591" text-anchor="middle" font-family="'SF Mono', 'JetBrains Mono', 'Fira Code', monospace" font-size="11" font-weight="500" letter-spacing="1" fill="#a78bfa" opacity="0.7">
+      v0.1.0
+    </text>
+  </g>
+
+  <!-- Decorative corner accents -->
+  <g opacity="0.15">
+    <line x1="30" y1="30" x2="70" y2="30" stroke="#7c3aed" stroke-width="1.5"/>
+    <line x1="30" y1="30" x2="30" y2="70" stroke="#7c3aed" stroke-width="1.5"/>
+    <line x1="570" y1="30" x2="530" y2="30" stroke="#7c3aed" stroke-width="1.5"/>
+    <line x1="570" y1="30" x2="570" y2="70" stroke="#7c3aed" stroke-width="1.5"/>
+    <line x1="30" y1="570" x2="70" y2="570" stroke="#7c3aed" stroke-width="1.5"/>
+    <line x1="30" y1="570" x2="30" y2="530" stroke="#7c3aed" stroke-width="1.5"/>
+    <line x1="570" y1="570" x2="530" y2="570" stroke="#7c3aed" stroke-width="1.5"/>
+    <line x1="570" y1="570" x2="570" y2="530" stroke="#7c3aed" stroke-width="1.5"/>
+  </g>
+</svg>

@@ -1,0 +1,795 @@
+{
+  "classes": {
+    "Graph": {
+      "methods": {
+        "__init__": {
+          "parameters": {
+            "incoming_graph_data": "Any",
+            "attr": "Any"
+          },
+          "returns": "None",
+          "doc": "Initialize self.  See help(type(self)) for accurate signature."
+        },
+        "add_edge": {
+          "parameters": {
+            "u_of_edge": "Any",
+            "v_of_edge": "Any",
+            "attr": "Any"
+          },
+          "returns": "None",
+          "doc": ""
+        },
+        "add_edges_from": {
+          "parameters": {
+            "ebunch": "Any",
+            "attr": "Any"
+          },
+          "returns": "None",
+          "doc": ""
+        },
+        "add_node": {
+          "parameters": {
+            "node_for_adding": "Any",
+            "attr": "Any"
+          },
+          "returns": "None",
+          "doc": ""
+        },
+        "add_nodes_from": {
+          "parameters": {
+            "nodes": "Any",
+            "attr": "Any"
+          },
+          "returns": "None",
+          "doc": ""
+        },
+        "add_weighted_edges_from": {
+          "parameters": {
+            "ebunch": "Any",
+            "weight": "str"
+          },
+          "returns": "None",
+          "doc": ""
+        },
+        "adjacency": {
+          "parameters": {},
+          "returns": "Any",
+          "doc": ""
+        },
+        "clear": {
+          "parameters": {},
+          "returns": "None",
+          "doc": ""
+        },
+        "clear_edges": {
+          "parameters": {},
+          "returns": "None",
+          "doc": ""
+        },
+        "copy": {
+          "parameters": {},
+          "returns": "Graph",
+          "doc": ""
+        },
+        "get_edge_data": {
+          "parameters": {
+            "u": "Any",
+            "v": "Any",
+            "default": "Any"
+          },
+          "returns": "Any",
+          "doc": ""
+        },
+        "has_edge": {
+          "parameters": {
+            "u": "Any",
+            "v": "Any"
+          },
+          "returns": "bool",
+          "doc": ""
+        },
+        "has_node": {
+          "parameters": {
+            "n": "Any"
+          },
+          "returns": "bool",
+          "doc": ""
+        },
+        "is_directed": {
+          "parameters": {},
+          "returns": "bool",
+          "doc": ""
+        },
+        "is_multigraph": {
+          "parameters": {},
+          "returns": "bool",
+          "doc": ""
+        },
+        "neighbors": {
+          "parameters": {
+            "n": "Any"
+          },
+          "returns": "Any",
+          "doc": ""
+        },
+        "number_of_edges": {
+          "parameters": {},
+          "returns": "int",
+          "doc": ""
+        },
+        "number_of_nodes": {
+          "parameters": {},
+          "returns": "int",
+          "doc": ""
+        },
+        "order": {
+          "parameters": {},
+          "returns": "int",
+          "doc": ""
+        },
+        "remove_edge": {
+          "parameters": {
+            "u": "Any",
+            "v": "Any"
+          },
+          "returns": "None",
+          "doc": ""
+        },
+        "remove_node": {
+          "parameters": {
+            "n": "Any"
+          },
+          "returns": "None",
+          "doc": ""
+        },
+        "size": {
+          "parameters": {
+            "weight": "str | None"
+          },
+          "returns": "Any",
+          "doc": ""
+        },
+        "subgraph": {
+          "parameters": {
+            "nodes": "Any"
+          },
+          "returns": "Graph",
+          "doc": ""
+        },
+        "to_undirected": {
+          "parameters": {},
+          "returns": "Graph",
+          "doc": ""
+        }
+      },
+      "doc": "Undirected graph with self-loops but no parallel edges."
+    },
+    "DiGraph": {
+      "methods": {
+        "__init__": {
+          "parameters": {
+            "incoming_graph_data": "Any",
+            "attr": "Any"
+          },
+          "returns": "None",
+          "doc": "Initialize self.  See help(type(self)) for accurate signature."
+        },
+        "add_edge": {
+          "parameters": {
+            "u_of_edge": "Any",
+            "v_of_edge": "Any",
+            "attr": "Any"
+          },
+          "returns": "None",
+          "doc": ""
+        },
+        "add_node": {
+          "parameters": {
+            "node_for_adding": "Any",
+            "attr": "Any"
+          },
+          "returns": "None",
+          "doc": ""
+        },
+        "clear": {
+          "parameters": {},
+          "returns": "None",
+          "doc": ""
+        },
+        "clear_edges": {
+          "parameters": {},
+          "returns": "None",
+          "doc": ""
+        },
+        "copy": {
+          "parameters": {},
+          "returns": "DiGraph",
+          "doc": ""
+        },
+        "has_edge": {
+          "parameters": {
+            "u": "Any",
+            "v": "Any"
+          },
+          "returns": "bool",
+          "doc": ""
+        },
+        "in_degree": {
+          "parameters": {
+            "nbunch": "Any"
+          },
+          "returns": "Any",
+          "doc": ""
+        },
+        "is_directed": {
+          "parameters": {},
+          "returns": "bool",
+          "doc": ""
+        },
+        "neighbors": {
+          "parameters": {
+            "n": "Any"
+          },
+          "returns": "Any",
+          "doc": ""
+        },
+        "number_of_edges": {
+          "parameters": {},
+          "returns": "int",
+          "doc": ""
+        },
+        "out_degree": {
+          "parameters": {
+            "nbunch": "Any"
+          },
+          "returns": "Any",
+          "doc": ""
+        },
+        "predecessors": {
+          "parameters": {
+            "n": "Any"
+          },
+          "returns": "Any",
+          "doc": ""
+        },
+        "remove_edge": {
+          "parameters": {
+            "u": "Any",
+            "v": "Any"
+          },
+          "returns": "None",
+          "doc": ""
+        },
+        "remove_node": {
+          "parameters": {
+            "n": "Any"
+          },
+          "returns": "None",
+          "doc": ""
+        },
+        "reverse": {
+          "parameters": {
+            "copy": "bool"
+          },
+          "returns": "DiGraph",
+          "doc": ""
+        },
+        "subgraph": {
+          "parameters": {
+            "nodes": "Any"
+          },
+          "returns": "DiGraph",
+          "doc": ""
+        },
+        "successors": {
+          "parameters": {
+            "n": "Any"
+          },
+          "returns": "Any",
+          "doc": ""
+        },
+        "to_undirected": {
+          "parameters": {},
+          "returns": "Graph",
+          "doc": ""
+        }
+      },
+      "doc": "Directed graph with self-loops but no parallel edges."
+    },
+    "MultiGraph": {
+      "methods": {
+        "__init__": {
+          "parameters": {
+            "incoming_graph_data": "Any",
+            "attr": "Any"
+          },
+          "returns": "None",
+          "doc": "Initialize self.  See help(type(self)) for accurate signature."
+        },
+        "add_edge": {
+          "parameters": {
+            "u": "Any",
+            "v": "Any",
+            "key": "Any",
+            "attr": "Any"
+          },
+          "returns": "Any",
+          "doc": ""
+        },
+        "add_edges_from": {
+          "parameters": {
+            "ebunch": "Any",
+            "attr": "Any"
+          },
+          "returns": "None",
+          "doc": ""
+        },
+        "add_node": {
+          "parameters": {
+            "n": "Any",
+            "attr": "Any"
+          },
+          "returns": "None",
+          "doc": ""
+        },
+        "add_nodes_from": {
+          "parameters": {
+            "nodes": "Any",
+            "attr": "Any"
+          },
+          "returns": "None",
+          "doc": ""
+        },
+        "add_weighted_edges_from": {
+          "parameters": {
+            "ebunch": "Any",
+            "weight": "str"
+          },
+          "returns": "None",
+          "doc": ""
+        },
+        "clear": {
+          "parameters": {},
+          "returns": "None",
+          "doc": ""
+        },
+        "copy": {
+          "parameters": {},
+          "returns": "MultiGraph",
+          "doc": ""
+        },
+        "degree": {
+          "parameters": {
+            "nbunch": "Any"
+          },
+          "returns": "Any",
+          "doc": ""
+        },
+        "get_edge_data": {
+          "parameters": {
+            "u": "Any",
+            "v": "Any",
+            "key": "Any",
+            "default": "Any"
+          },
+          "returns": "Any",
+          "doc": ""
+        },
+        "has_edge": {
+          "parameters": {
+            "u": "Any",
+            "v": "Any",
+            "key": "Any"
+          },
+          "returns": "bool",
+          "doc": ""
+        },
+        "has_node": {
+          "parameters": {
+            "n": "Any"
+          },
+          "returns": "bool",
+          "doc": ""
+        },
+        "is_directed": {
+          "parameters": {},
+          "returns": "bool",
+          "doc": ""
+        },
+        "is_multigraph": {
+          "parameters": {},
+          "returns": "bool",
+          "doc": ""
+        },
+        "neighbors": {
+          "parameters": {
+            "n": "Any"
+          },
+          "returns": "list[Any]",
+          "doc": ""
+        },
+        "number_of_edges": {
+          "parameters": {},
+          "returns": "int",
+          "doc": ""
+        },
+        "number_of_nodes": {
+          "parameters": {},
+          "returns": "int",
+          "doc": ""
+        },
+        "remove_edge": {
+          "parameters": {
+            "u": "Any",
+            "v": "Any",
+            "key": "Any"
+          },
+          "returns": "None",
+          "doc": ""
+        },
+        "remove_node": {
+          "parameters": {
+            "n": "Any"
+          },
+          "returns": "None",
+          "doc": ""
+        },
+        "subgraph": {
+          "parameters": {
+            "nodes": "Any"
+          },
+          "returns": "MultiGraph",
+          "doc": ""
+        },
+        "to_undirected": {
+          "parameters": {},
+          "returns": "MultiGraph",
+          "doc": ""
+        }
+      },
+      "doc": "Undirected multigraph allowing parallel edges."
+    },
+    "MultiDiGraph": {
+      "methods": {
+        "__init__": {
+          "parameters": {
+            "incoming_graph_data": "Any",
+            "attr": "Any"
+          },
+          "returns": "None",
+          "doc": "Initialize self.  See help(type(self)) for accurate signature."
+        },
+        "add_edge": {
+          "parameters": {
+            "u": "Any",
+            "v": "Any",
+            "key": "Any",
+            "attr": "Any"
+          },
+          "returns": "Any",
+          "doc": ""
+        },
+        "add_edges_from": {
+          "parameters": {
+            "ebunch": "Any",
+            "attr": "Any"
+          },
+          "returns": "None",
+          "doc": ""
+        },
+        "add_node": {
+          "parameters": {
+            "n": "Any",
+            "attr": "Any"
+          },
+          "returns": "None",
+          "doc": ""
+        },
+        "add_nodes_from": {
+          "parameters": {
+            "nodes": "Any",
+            "attr": "Any"
+          },
+          "returns": "None",
+          "doc": ""
+        },
+        "add_weighted_edges_from": {
+          "parameters": {
+            "ebunch": "Any",
+            "weight": "str"
+          },
+          "returns": "None",
+          "doc": ""
+        },
+        "clear": {
+          "parameters": {},
+          "returns": "None",
+          "doc": ""
+        },
+        "copy": {
+          "parameters": {},
+          "returns": "MultiDiGraph",
+          "doc": ""
+        },
+        "degree": {
+          "parameters": {
+            "nbunch": "Any"
+          },
+          "returns": "Any",
+          "doc": ""
+        },
+        "get_edge_data": {
+          "parameters": {
+            "u": "Any",
+            "v": "Any",
+            "key": "Any",
+            "default": "Any"
+          },
+          "returns": "Any",
+          "doc": ""
+        },
+        "has_edge": {
+          "parameters": {
+            "u": "Any",
+            "v": "Any",
+            "key": "Any"
+          },
+          "returns": "bool",
+          "doc": ""
+        },
+        "has_node": {
+          "parameters": {
+            "n": "Any"
+          },
+          "returns": "bool",
+          "doc": ""
+        },
+        "in_degree": {
+          "parameters": {
+            "nbunch": "Any"
+          },
+          "returns": "Any",
+          "doc": ""
+        },
+        "is_directed": {
+          "parameters": {},
+          "returns": "bool",
+          "doc": ""
+        },
+        "is_multigraph": {
+          "parameters": {},
+          "returns": "bool",
+          "doc": ""
+        },
+        "neighbors": {
+          "parameters": {
+            "n": "Any"
+          },
+          "returns": "list[Any]",
+          "doc": ""
+        },
+        "number_of_edges": {
+          "parameters": {},
+          "returns": "int",
+          "doc": ""
+        },
+        "number_of_nodes": {
+          "parameters": {},
+          "returns": "int",
+          "doc": ""
+        },
+        "out_degree": {
+          "parameters": {
+            "nbunch": "Any"
+          },
+          "returns": "Any",
+          "doc": ""
+        },
+        "predecessors": {
+          "parameters": {
+            "n": "Any"
+          },
+          "returns": "list[Any]",
+          "doc": ""
+        },
+        "remove_edge": {
+          "parameters": {
+            "u": "Any",
+            "v": "Any",
+            "key": "Any"
+          },
+          "returns": "None",
+          "doc": ""
+        },
+        "remove_node": {
+          "parameters": {
+            "n": "Any"
+          },
+          "returns": "None",
+          "doc": ""
+        },
+        "reverse": {
+          "parameters": {
+            "copy": "bool"
+          },
+          "returns": "MultiDiGraph",
+          "doc": ""
+        },
+        "successors": {
+          "parameters": {
+            "n": "Any"
+          },
+          "returns": "list[Any]",
+          "doc": ""
+        },
+        "to_undirected": {
+          "parameters": {},
+          "returns": "MultiGraph",
+          "doc": ""
+        }
+      },
+      "doc": "Directed multigraph allowing parallel edges."
+    }
+  },
+  "functions": {
+    "complete_graph": {
+      "parameters": {
+        "n": "int",
+        "create_using": "Any"
+      },
+      "returns": "Any",
+      "doc": "Return the complete graph K_n."
+    },
+    "cycle_graph": {
+      "parameters": {
+        "n": "int",
+        "create_using": "Any"
+      },
+      "returns": "Any",
+      "doc": "Return the cycle graph C_n of n cyclically connected nodes."
+    },
+    "path_graph": {
+      "parameters": {
+        "n": "int",
+        "create_using": "Any"
+      },
+      "returns": "Any",
+      "doc": "Return the path graph P_n of n nodes linearly connected."
+    },
+    "star_graph": {
+      "parameters": {
+        "n": "int",
+        "create_using": "Any"
+      },
+      "returns": "Any",
+      "doc": "Return the star graph with n+1 nodes: center 0 connected to 1..n."
+    },
+    "barbell_graph": {
+      "parameters": {
+        "m1": "int",
+        "m2": "int",
+        "create_using": "Any"
+      },
+      "returns": "Any",
+      "doc": "Return the barbell graph: two complete graphs connected by a path."
+    },
+    "empty_graph": {
+      "parameters": {
+        "n": "int",
+        "create_using": "Any"
+      },
+      "returns": "Any",
+      "doc": "Return the empty graph with n nodes and zero edges."
+    },
+    "to_dict_of_dicts": {
+      "parameters": {
+        "G": "Any",
+        "nodelist": "list[Any] | None",
+        "edge_data": "Any"
+      },
+      "returns": "dict[Any, dict[Any, Any]]",
+      "doc": "Return adjacency representation of graph as a dict of dicts."
+    },
+    "from_dict_of_dicts": {
+      "parameters": {
+        "d": "dict[Any, dict[Any, Any]]",
+        "create_using": "Any",
+        "multigraph_input": "bool"
+      },
+      "returns": "Any",
+      "doc": "Return a graph from a dict of dicts."
+    },
+    "to_dict_of_lists": {
+      "parameters": {
+        "G": "Any",
+        "nodelist": "list[Any] | None"
+      },
+      "returns": "dict[Any, list[Any]]",
+      "doc": "Return adjacency representation of graph as a dict of lists."
+    },
+    "from_dict_of_lists": {
+      "parameters": {
+        "d": "dict[Any, list[Any]]",
+        "create_using": "Any"
+      },
+      "returns": "Any",
+      "doc": "Return a graph from a dict of lists."
+    },
+    "to_edgelist": {
+      "parameters": {
+        "G": "Any",
+        "nodelist": "list[Any] | None"
+      },
+      "returns": "list[tuple[Any, ...]]",
+      "doc": "Return a list of edges in the graph."
+    },
+    "to_networkx_graph": {
+      "parameters": {
+        "data": "Any",
+        "create_using": "Any",
+        "multigraph_input": "bool"
+      },
+      "returns": "Any",
+      "doc": "Convert various data formats to a NetworkX graph."
+    },
+    "relabel_nodes": {
+      "parameters": {
+        "G": "Any",
+        "mapping": "Mapping[Any, Any] | Callable[[Any], Any]",
+        "copy": "bool"
+      },
+      "returns": "Any",
+      "doc": "Relabel the nodes of the graph G."
+    },
+    "convert_node_labels_to_integers": {
+      "parameters": {
+        "G": "Any",
+        "first_label": "int",
+        "ordering": "str",
+        "label_attribute": "str | None"
+      },
+      "returns": "Any",
+      "doc": "Return a copy of G with node labels replaced by integers."
+    },
+    "nodes_equal": {
+      "parameters": {
+        "nodes1": "Any",
+        "nodes2": "Any"
+      },
+      "returns": "bool",
+      "doc": "Check if two node sequences are equal (unordered)."
+    },
+    "edges_equal": {
+      "parameters": {
+        "edges1": "Any",
+        "edges2": "Any",
+        "directed": "bool"
+      },
+      "returns": "bool",
+      "doc": "Check if two edge sequences are equal (unordered)."
+    },
+    "graphs_equal": {
+      "parameters": {
+        "g1": "Any",
+        "g2": "Any"
+      },
+      "returns": "bool",
+      "doc": "Check if two graphs are structurally equal."
+    },
+    "flatten": {
+      "parameters": {
+        "obj": "Any",
+        "result": "list[Any] | None"
+      },
+      "returns": "Any",
+      "doc": "Return flattened version of (possibly nested) iterable."
+    },
+    "pairwise": {
+      "parameters": {
+        "iterable": "Any"
+      },
+      "returns": "Any",
+      "doc": "s -> (s0,s1), (s1,s2), (s2, s3), ..."
+    }
+  }
+}
