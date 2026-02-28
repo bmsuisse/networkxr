@@ -84,6 +84,22 @@ class DiGraph(Graph):
         del _pred[n]
         del self._node[n]
 
+    def remove_nodes_from(self, nodes: Any) -> None:
+        _adj = self._adj
+        _pred = self._pred
+        for n in nodes:
+            try:
+                succs = _adj[n]
+            except KeyError:
+                continue
+            for succ in succs:
+                _pred[succ].pop(n, None)
+            for pred in list(_pred[n]):
+                _adj[pred].pop(n, None)
+            del _adj[n]
+            del _pred[n]
+            del self._node[n]
+
     # ── edge ops (EAFP hot path) ────────────────────────────────
 
     def add_edge(self, u_of_edge: Any, v_of_edge: Any, **attr: Any) -> None:
@@ -105,7 +121,42 @@ class DiGraph(Graph):
         except KeyError:
             dd = dict(attr)
             adj_u[v] = dd
-            _pred[v][u] = dd  # share same dict
+            _pred[v][u] = dd
+
+    def add_edges_from(self, ebunch_to_add: Any, **attr: Any) -> None:
+        _node = self._node
+        _adj = self._adj
+        _pred = self._pred
+        for e in ebunch_to_add:
+            ne = len(e)
+            if ne == 3:
+                u, v, dd = e
+                # Update attributes with kwargs overrides
+                dd = dict(dd)
+                dd.update(attr)
+            elif ne == 2:
+                u, v = e
+                dd = dict(attr)
+            else:
+                msg = f"Edge tuple {e} must be a 2-tuple or 3-tuple."
+                raise ValueError(msg)
+            
+            if u not in _node:
+                _node[u] = {}
+                _adj[u] = {}
+                _pred[u] = {}
+            if v not in _node:
+                _node[v] = {}
+                _adj[v] = {}
+                _pred[v] = {}
+            adj_u = _adj[u]
+            try:
+                adj_u[v].update(dd)
+            except KeyError:
+                dd_copy = dd.copy()
+                adj_u[v] = dd_copy
+                _pred[v][u] = dd_copy
+
 
     def remove_edge(self, u: Any, v: Any) -> None:
         try:

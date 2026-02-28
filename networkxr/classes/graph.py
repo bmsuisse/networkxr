@@ -145,6 +145,18 @@ class Graph:
         del _adj[n]
         del self._node[n]
 
+    def remove_nodes_from(self, nodes: Any) -> None:
+        _adj = self._adj
+        for n in nodes:
+            try:
+                nbrs = _adj[n]
+            except KeyError:
+                continue
+            for nbr in nbrs:
+                _adj[nbr].pop(n, None)
+            del _adj[n]
+            del self._node[n]
+
     # ── edge ops (EAFP hot path — the most critical) ──────────
 
     def add_edge(self, u_of_edge: Any, v_of_edge: Any, **attr: Any) -> None:

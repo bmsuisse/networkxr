@@ -18,10 +18,18 @@ def is_isomorphic(G1: Any, G2: Any) -> bool:
         return False
 
     # Compare degree sequences
-    deg1 = sorted(d for _, d in G1.degree())
-    deg2 = sorted(d for _, d in G2.degree())
-    if deg1 != deg2:
-        return False
+    if G1.is_directed() and G2.is_directed():
+        in_deg1 = sorted(d for _, d in G1.in_degree())
+        in_deg2 = sorted(d for _, d in G2.in_degree())
+        out_deg1 = sorted(d for _, d in G1.out_degree())
+        out_deg2 = sorted(d for _, d in G2.out_degree())
+        if in_deg1 != in_deg2 or out_deg1 != out_deg2:
+            return False
+    else:
+        deg1 = sorted(d for _, d in G1.degree())
+        deg2 = sorted(d for _, d in G2.degree())
+        if deg1 != deg2:
+            return False
 
     # For small graphs, try permutation-based matching
     nodes1 = list(G1.nodes())
@@ -49,14 +57,17 @@ def _vf2_match(
 
     idx = len(mapping)
     n1 = nodes1[idx]
-    d1 = G1.degree(n1)
 
     for n2 in nodes2:
         if n2 in used:
             continue
-        d2 = G2.degree(n2)
-        if d1 != d2:
-            continue
+            
+        if G1.is_directed():
+            if G1.in_degree(n1) != G2.in_degree(n2) or G1.out_degree(n1) != G2.out_degree(n2):
+                continue
+        else:
+            if G1.degree(n1) != G2.degree(n2):
+                continue
 
         # Check consistency with existing mapping
         consistent = True
@@ -64,6 +75,14 @@ def _vf2_match(
             if G1.has_edge(n1, mapped_n1) != G2.has_edge(n2, mapped_n2):
                 consistent = False
                 break
+            if G1.is_directed() and G1.has_edge(mapped_n1, n1) != G2.has_edge(mapped_n2, n2):
+                consistent = False
+                break
+
+        # Check self-loop consistency
+        if G1.has_edge(n1, n1) != G2.has_edge(n2, n2):
+            consistent = False
+
         if not consistent:
             continue
 

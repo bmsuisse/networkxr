@@ -16,7 +16,18 @@ classifiers = [
 plot = ["plotly>=5.0.0"]
 
 [dependency-groups]
-dev = ["pytest>=8", "pytest-benchmark>=5", "ruff>=0.11", "pyright>=1.1", "networkx>=3.4", "zensical>=0.0.20", "maturin>=1.7", "plotly>=5.0.0", "faker>=37"]
+dev = [
+    "pytest>=8",
+    "pytest-benchmark>=5",
+    "ruff>=0.11",
+    "pyright>=1.1",
+    "networkx>=3.4",
+    "zensical>=0.0.20",
+    "maturin>=1.7",
+    "plotly>=5.0.0",
+    "faker>=37",
+    "hypothesis>=6.151.9",
+]
 
 [tool.setuptools.packages.find]
 include = ["networkxr*", "networkx*"]

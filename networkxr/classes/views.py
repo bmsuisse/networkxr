@@ -195,7 +195,10 @@ class DegreeView:
         if self._pred is not None:
             pred = self._pred
             for n, adj_nbrs in self._adj.items():
-                yield (n, len(adj_nbrs) + len(pred[n]))
+                if n in pred:
+                    yield (n, len(adj_nbrs) + len(pred[n]))
+                else:
+                    yield (n, len(adj_nbrs))
         else:
             for n, nbrs in self._adj.items():
                 yield (n, len(nbrs))
