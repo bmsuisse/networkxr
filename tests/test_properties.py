@@ -37,18 +37,18 @@ def test_property_remove_nodes(nodes):
     """
     G = nx.Graph()
     G.add_nodes_from(nodes)
-    
+
     # Add a central hub node connected to everyone
     hub = "HUB_NODE"
     edge_list = [(hub, n) for n in nodes]
     G.add_edges_from(edge_list)
-    
+
     assert G.number_of_edges() == len(nodes)
-    
+
     # Remove half the nodes
-    to_remove = nodes[:len(nodes)//2]
+    to_remove = nodes[: len(nodes) // 2]
     G.remove_nodes_from(to_remove)
-    
+
     # Invariants
     # Use sets to determine correct remaining counts, since 'hub' might already be in nodes
     hub = "HUB_NODE"
@@ -61,7 +61,7 @@ def test_property_remove_nodes(nodes):
             assert G.has_edge(hub, n)
         if n != hub:
             assert G.has_edge(hub, n)
-        
+
     assert G.number_of_edges() == len(nodes) - len(to_remove)
 
 
@@ -72,14 +72,14 @@ def test_property_add_edges_undirected(edges):
     """
     G = nx.Graph()
     G.add_edges_from(edges)
-    
+
     # Invariants
     for u, v in edges:
         assert G.has_node(u)
         assert G.has_node(v)
         assert G.has_edge(u, v)
         assert G.has_edge(v, u)
-        
+
     # Edge count should be <= len(edges) because of duplicates or (u,v)/(v,u) pairs
     assert G.number_of_edges() <= len(edges)
 
@@ -91,13 +91,13 @@ def test_property_add_edges_directed(edges):
     """
     G = nx.DiGraph()
     G.add_edges_from(edges)
-    
+
     # Invariants
     for u, v in edges:
         assert G.has_node(u)
         assert G.has_node(v)
         assert G.has_edge(u, v)
-        
+
     # We know that for each unique pair (u, v) in edges, the edge exists.
     # However, if u and v are tuples (v1, v2) they can be misparsed if len is 2/3
     # G.number_of_edges() will <= len(edges)
@@ -113,11 +113,11 @@ def test_property_clear_graph(nodes):
     G.add_nodes_from(nodes)
     if len(nodes) > 1:
         G.add_edges_from(zip(nodes[:-1], nodes[1:]))
-    
+
     assert len(G) == len(set(nodes))
-    
+
     G.clear()
-    
+
     assert len(G) == 0
     assert G.number_of_edges() == 0
     assert list(G.nodes) == []
@@ -134,17 +134,17 @@ def test_property_dict_conversion(edges):
     G1.add_edges_from(edges)
     d1 = nx.to_dict_of_dicts(G1)
     G1_rebuilt = nx.from_dict_of_dicts(d1, create_using=nx.Graph)
-    
+
     assert nx.is_isomorphic(G1, G1_rebuilt)
     assert set(G1.nodes) == set(G1_rebuilt.nodes)
     assert G1.number_of_edges() == G1_rebuilt.number_of_edges()
-    
+
     # Test Directed
     G2 = nx.DiGraph()
     G2.add_edges_from(edges)
     d2 = nx.to_dict_of_dicts(G2)
     G2_rebuilt = nx.from_dict_of_dicts(d2, create_using=nx.DiGraph)
-    
+
     assert nx.is_isomorphic(G2, G2_rebuilt)
     assert set(G2.nodes) == set(G2_rebuilt.nodes)
     assert G2.number_of_edges() == G2_rebuilt.number_of_edges()

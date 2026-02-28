@@ -61,7 +61,7 @@ def _vf2_match(
     for n2 in nodes2:
         if n2 in used:
             continue
-            
+
         if G1.is_directed():
             if G1.in_degree(n1) != G2.in_degree(n2) or G1.out_degree(n1) != G2.out_degree(n2):
                 continue

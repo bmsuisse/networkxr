@@ -140,7 +140,7 @@ class DiGraph(Graph):
             else:
                 msg = f"Edge tuple {e} must be a 2-tuple or 3-tuple."
                 raise ValueError(msg)
-            
+
             if u not in _node:
                 _node[u] = {}
                 _adj[u] = {}
@@ -156,7 +156,6 @@ class DiGraph(Graph):
                 dd_copy = dd.copy()
                 adj_u[v] = dd_copy
                 _pred[v][u] = dd_copy
-
 
     def remove_edge(self, u: Any, v: Any) -> None:
         try:
