@@ -29,11 +29,8 @@ impl CsrSnapshot {
     fn from_adj(adj: &FxHashMap<i64, FxHashSet<i64>>) -> Self {
         let n = adj.len();
         let nodes: Vec<i64> = adj.keys().copied().collect();
-        let node_idx: FxHashMap<i64, usize> = nodes
-            .iter()
-            .enumerate()
-            .map(|(i, &id)| (id, i))
-            .collect();
+        let node_idx: FxHashMap<i64, usize> =
+            nodes.iter().enumerate().map(|(i, &id)| (id, i)).collect();
 
         let mut offsets = Vec::with_capacity(n + 1);
         let mut cols = Vec::new();
@@ -49,7 +46,13 @@ impl CsrSnapshot {
             offsets.push(cols.len());
         }
 
-        CsrSnapshot { nodes, node_idx, offsets, cols, degrees }
+        CsrSnapshot {
+            nodes,
+            node_idx,
+            offsets,
+            cols,
+            degrees,
+        }
     }
 
     #[inline]
@@ -103,34 +106,46 @@ impl IntGraphCore {
     fn add_edge(&mut self, u: i64, v: i64) {
         let inserted = self.adj.entry(u).or_default().insert(v);
         self.adj.entry(v).or_default().insert(u);
-        if inserted { self.num_edges += 1; }
+        if inserted {
+            self.num_edges += 1;
+        }
         self.invalidate_csr();
     }
 
     fn add_edges_from(&mut self, edges: Vec<(i64, i64)>) {
-        if self.adj.is_empty() { self.adj.reserve(edges.len() / 5); }
+        if self.adj.is_empty() {
+            self.adj.reserve(edges.len() / 5);
+        }
         for (u, v) in edges {
             let ins = self.adj.entry(u).or_default().insert(v);
             self.adj.entry(v).or_default().insert(u);
-            if ins { self.num_edges += 1; }
+            if ins {
+                self.num_edges += 1;
+            }
         }
         self.invalidate_csr();
     }
 
     fn add_edges_flat(&mut self, flat: Vec<i64>) {
         let n_edges = flat.len() / 2;
-        if self.adj.is_empty() && n_edges > 0 { self.adj.reserve(n_edges / 5); }
+        if self.adj.is_empty() && n_edges > 0 {
+            self.adj.reserve(n_edges / 5);
+        }
         for chunk in flat.chunks_exact(2) {
             let (u, v) = (chunk[0], chunk[1]);
             let ins = self.adj.entry(u).or_default().insert(v);
             self.adj.entry(v).or_default().insert(u);
-            if ins { self.num_edges += 1; }
+            if ins {
+                self.num_edges += 1;
+            }
         }
         self.invalidate_csr();
     }
 
     fn add_nodes_from(&mut self, nodes: Vec<i64>) {
-        for n in nodes { self.adj.entry(n).or_default(); }
+        for n in nodes {
+            self.adj.entry(n).or_default();
+        }
         self.invalidate_csr();
     }
 
@@ -143,30 +158,34 @@ impl IntGraphCore {
     /// Bypasses Python list allocations for massive benchmarks.
     #[pyo3(signature = (n, m, seed=42))]
     fn build_random(&mut self, n: i64, m: usize, seed: u64) {
-        if self.adj.is_empty() { self.adj.reserve((n as usize) / 2); }
+        if self.adj.is_empty() {
+            self.adj.reserve((n as usize) / 2);
+        }
         let mut state = seed;
-        if state == 0 { state = 1; }
-        
+        if state == 0 {
+            state = 1;
+        }
+
         let mut added = 0;
         while added < m {
             // XorShift64
             state ^= state << 13;
             state ^= state >> 7;
             state ^= state << 17;
-            
+
             let u = (state % (n as u64)) as i64;
-            
+
             state ^= state << 13;
             state ^= state >> 7;
             state ^= state << 17;
-            
+
             let v = (state % (n as u64)) as i64;
 
             if u != v {
                 let ins = self.adj.entry(u).or_default().insert(v);
                 self.adj.entry(v).or_default().insert(u);
-                if ins { 
-                    self.num_edges += 1; 
+                if ins {
+                    self.num_edges += 1;
                     added += 1;
                 }
             }
@@ -174,24 +193,38 @@ impl IntGraphCore {
         self.invalidate_csr();
     }
 
-    fn has_node(&self, n: i64) -> bool { self.adj.contains_key(&n) }
-    fn number_of_nodes(&self) -> usize { self.adj.len() }
-    fn number_of_edges(&self) -> usize { self.num_edges }
+    fn has_node(&self, n: i64) -> bool {
+        self.adj.contains_key(&n)
+    }
+    fn number_of_nodes(&self) -> usize {
+        self.adj.len()
+    }
+    fn number_of_edges(&self) -> usize {
+        self.num_edges
+    }
 
     fn neighbors(&self, n: i64) -> Vec<i64> {
-        self.adj.get(&n).map_or_else(Vec::new, |s| s.iter().copied().collect())
+        self.adj
+            .get(&n)
+            .map_or_else(Vec::new, |s| s.iter().copied().collect())
     }
 
     fn degree(&self, n: i64) -> usize {
         self.adj.get(&n).map_or(0, |s| s.len())
     }
 
-    fn nodes(&self) -> Vec<i64> { self.adj.keys().copied().collect() }
+    fn nodes(&self) -> Vec<i64> {
+        self.adj.keys().copied().collect()
+    }
 
     fn edges(&self) -> Vec<(i64, i64)> {
         let mut result = Vec::with_capacity(self.num_edges);
         for (&u, nbrs) in &self.adj {
-            for &v in nbrs { if u <= v { result.push((u, v)); } }
+            for &v in nbrs {
+                if u <= v {
+                    result.push((u, v));
+                }
+            }
         }
         result
     }
@@ -199,7 +232,12 @@ impl IntGraphCore {
     fn edges_flat(&self) -> Vec<i64> {
         let mut result = Vec::with_capacity(self.num_edges * 2);
         for (&u, nbrs) in &self.adj {
-            for &v in nbrs { if u <= v { result.push(u); result.push(v); } }
+            for &v in nbrs {
+                if u <= v {
+                    result.push(u);
+                    result.push(v);
+                }
+            }
         }
         result
     }
@@ -210,7 +248,8 @@ impl IntGraphCore {
 
     fn has_edges(&self, edges: Vec<(i64, i64)>) -> Vec<bool> {
         // Parallel bulk lookup with rayon
-        edges.par_iter()
+        edges
+            .par_iter()
             .map(|(u, v)| self.adj.get(u).is_some_and(|s| s.contains(v)))
             .collect()
     }
@@ -222,21 +261,24 @@ impl IntGraphCore {
         let n = csr.nodes.len();
 
         // Parallel triangle counting via rayon
-        let count: usize = (0..n).into_par_iter().map(|i| {
-            let u = csr.nodes[i];
-            let u_nbrs = csr.neighbors_of(i);
-            let mut local = 0usize;
-            for &v in u_nbrs {
-                if v > u {
-                    if let Some(&j) = csr.node_idx.get(&v) {
-                        // SIMD-friendly sorted merge-intersection
-                        let v_nbrs = csr.neighbors_of(j);
-                        local += sorted_intersect_count(u_nbrs, v_nbrs, v);
+        let count: usize = (0..n)
+            .into_par_iter()
+            .map(|i| {
+                let u = csr.nodes[i];
+                let u_nbrs = csr.neighbors_of(i);
+                let mut local = 0usize;
+                for &v in u_nbrs {
+                    if v > u {
+                        if let Some(&j) = csr.node_idx.get(&v) {
+                            // SIMD-friendly sorted merge-intersection
+                            let v_nbrs = csr.neighbors_of(j);
+                            local += sorted_intersect_count(u_nbrs, v_nbrs, v);
+                        }
                     }
                 }
-            }
-            local
-        }).sum();
+                local
+            })
+            .sum();
 
         count
     }
@@ -248,7 +290,9 @@ impl IntGraphCore {
         let mut queue = VecDeque::new();
 
         for &start in self.adj.keys() {
-            if visited.contains(&start) { continue; }
+            if visited.contains(&start) {
+                continue;
+            }
             let mut sz = 0usize;
             queue.push_back(start);
             visited.insert(start);
@@ -256,7 +300,9 @@ impl IntGraphCore {
                 sz += 1;
                 if let Some(nbrs) = self.adj.get(&node) {
                     for &nbr in nbrs {
-                        if visited.insert(nbr) { queue.push_back(nbr); }
+                        if visited.insert(nbr) {
+                            queue.push_back(nbr);
+                        }
                     }
                 }
             }
@@ -266,8 +312,12 @@ impl IntGraphCore {
     }
 
     fn shortest_path_length(&self, source: i64, target: i64) -> i64 {
-        if source == target { return 0; }
-        if !self.adj.contains_key(&source) || !self.adj.contains_key(&target) { return -1; }
+        if source == target {
+            return 0;
+        }
+        if !self.adj.contains_key(&source) || !self.adj.contains_key(&target) {
+            return -1;
+        }
 
         let mut visited = FxHashSet::default();
         let mut queue = VecDeque::new();
@@ -277,8 +327,12 @@ impl IntGraphCore {
         while let Some((node, dist)) = queue.pop_front() {
             if let Some(nbrs) = self.adj.get(&node) {
                 for &nbr in nbrs {
-                    if nbr == target { return dist + 1; }
-                    if visited.insert(nbr) { queue.push_back((nbr, dist + 1)); }
+                    if nbr == target {
+                        return dist + 1;
+                    }
+                    if visited.insert(nbr) {
+                        queue.push_back((nbr, dist + 1));
+                    }
                 }
             }
         }
@@ -290,7 +344,11 @@ impl IntGraphCore {
         let mut count = 0;
         for &u in &nset {
             if let Some(nbrs) = self.adj.get(&u) {
-                for &v in nbrs { if v >= u && nset.contains(&v) { count += 1; } }
+                for &v in nbrs {
+                    if v >= u && nset.contains(&v) {
+                        count += 1;
+                    }
+                }
             }
         }
         count
@@ -301,7 +359,9 @@ impl IntGraphCore {
     fn pagerank(&mut self, damping: f64, max_iter: usize, tol: f64) -> Vec<(i64, f64)> {
         let csr = self.ensure_csr();
         let n = csr.nodes.len();
-        if n == 0 { return Vec::new(); }
+        if n == 0 {
+            return Vec::new();
+        }
 
         let init = 1.0 / n as f64;
         let base = (1.0 - damping) / n as f64;
@@ -313,19 +373,24 @@ impl IntGraphCore {
 
             // Parallel scatter: each node distributes rank to neighbors
             // Collect contributions per-thread then merge (avoids data races)
-            let contribs: Vec<Vec<(usize, f64)>> = (0..n).into_par_iter().map(|i| {
-                let deg = csr.degrees[i] as f64;
-                if deg == 0.0 { return Vec::new(); }
-                let contrib = damping * rank[i] / deg;
-                let nbrs = csr.neighbors_of(i);
-                let mut local = Vec::with_capacity(nbrs.len());
-                for &nbr in nbrs {
-                    if let Some(&j) = csr.node_idx.get(&nbr) {
-                        local.push((j, contrib));
+            let contribs: Vec<Vec<(usize, f64)>> = (0..n)
+                .into_par_iter()
+                .map(|i| {
+                    let deg = csr.degrees[i] as f64;
+                    if deg == 0.0 {
+                        return Vec::new();
                     }
-                }
-                local
-            }).collect();
+                    let contrib = damping * rank[i] / deg;
+                    let nbrs = csr.neighbors_of(i);
+                    let mut local = Vec::with_capacity(nbrs.len());
+                    for &nbr in nbrs {
+                        if let Some(&j) = csr.node_idx.get(&nbr) {
+                            local.push((j, contrib));
+                        }
+                    }
+                    local
+                })
+                .collect();
 
             // Sequential merge (fast — just additions into contiguous array)
             for thread_contribs in &contribs {
@@ -335,22 +400,34 @@ impl IntGraphCore {
             }
 
             // SIMD-friendly convergence check: contiguous f64 diff
-            let diff: f64 = rank.iter().zip(new_rank.iter())
+            let diff: f64 = rank
+                .iter()
+                .zip(new_rank.iter())
                 .map(|(a, b)| (a - b).abs())
                 .sum();
 
             std::mem::swap(&mut rank, &mut new_rank);
-            if diff < tol { break; }
+            if diff < tol {
+                break;
+            }
         }
 
         csr.nodes.iter().copied().zip(rank).collect()
     }
 
-    fn __len__(&self) -> usize { self.adj.len() }
-    fn __contains__(&self, n: i64) -> bool { self.adj.contains_key(&n) }
+    fn __len__(&self) -> usize {
+        self.adj.len()
+    }
+    fn __contains__(&self, n: i64) -> bool {
+        self.adj.contains_key(&n)
+    }
 
     fn __repr__(&self) -> String {
-        format!("IntGraphCore(nodes={}, edges={})", self.adj.len(), self.num_edges)
+        format!(
+            "IntGraphCore(nodes={}, edges={})",
+            self.adj.len(),
+            self.num_edges
+        )
     }
 }
 
@@ -364,8 +441,12 @@ fn sorted_intersect_count(a: &[i64], b: &[i64], min_node: i64) -> usize {
     let mut count = 0;
 
     // Skip past elements <= min_node (only count w > max(u, v))
-    while i < a.len() && a[i] <= min_node { i += 1; }
-    while j < b.len() && b[j] <= min_node { j += 1; }
+    while i < a.len() && a[i] <= min_node {
+        i += 1;
+    }
+    while j < b.len() && b[j] <= min_node {
+        j += 1;
+    }
 
     // Merge-intersection — sequential scan, SIMD-autovectorizable
     while i < a.len() && j < b.len() {
