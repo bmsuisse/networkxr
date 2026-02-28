@@ -58,6 +58,10 @@ from networkxr.relabel import convert_node_labels_to_integers, relabel_nodes
 # Removed functions (raise helpful deprecation messages)
 from networkxr.removed import random_tree
 
+# Drawing (optional — requires plotly)
+from networkxr.drawing import draw
+from networkxr.drawing.layout import circular_layout, spring_layout
+
 # Utils
 from networkxr.utils.misc import edges_equal, flatten, graphs_equal, nodes_equal, pairwise
 
@@ -83,9 +87,11 @@ __all__ = [
     "NodeNotFound",
     "PowerIterationFailedConvergence",
     "barbell_graph",
+    "circular_layout",
     "complete_graph",
     "convert_node_labels_to_integers",
     "cycle_graph",
+    "draw",
     "edges_equal",
     "empty_graph",
     "flatten",
@@ -98,6 +104,7 @@ __all__ = [
     "path_graph",
     "random_tree",
     "relabel_nodes",
+    "spring_layout",
     "star_graph",
     "to_dict_of_dicts",
     "to_dict_of_lists",

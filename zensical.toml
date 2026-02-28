@@ -10,7 +10,11 @@ nav = [
   ]},
   { "User Guide" = [
     { "Architecture" = "architecture.md" },
+    { "Plotting Graphs" = "plotting.md" },
     { "API Reference" = "api-reference.md" },
+  ]},
+  { "Cookbook" = [
+    { "Plotting" = "cookbook/plotting.md" },
   ]},
   { "API Details" = [
     { "Graph" = "api/graph.md" },
