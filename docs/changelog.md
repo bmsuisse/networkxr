@@ -5,9 +5,17 @@ This project follows [Semantic Versioning](https://semver.org/).
 
 ---
 
+### 🚀 Features
+
+- Introduce Hypothesis for property-based testing and update uv.lock with minor whitespace adjustments.
+
 ### Test
 
 - add hypothesis property-based test suite and fix edge-case bugs
+
+### 📦 Miscellaneous
+
+- bump version to 0.1.4 and ignore hypothesis cache
 
 ### 📦 Miscellaneous
 

@@ -142,6 +142,13 @@
           "returns": "None",
           "doc": ""
         },
+        "remove_nodes_from": {
+          "parameters": {
+            "nodes": "Any"
+          },
+          "returns": "None",
+          "doc": ""
+        },
         "size": {
           "parameters": {
             "weight": "str | None"
@@ -178,6 +185,14 @@
           "parameters": {
             "u_of_edge": "Any",
             "v_of_edge": "Any",
+            "attr": "Any"
+          },
+          "returns": "None",
+          "doc": ""
+        },
+        "add_edges_from": {
+          "parameters": {
+            "ebunch_to_add": "Any",
             "attr": "Any"
           },
           "returns": "None",
@@ -263,6 +278,13 @@
         "remove_node": {
           "parameters": {
             "n": "Any"
+          },
+          "returns": "None",
+          "doc": ""
+        },
+        "remove_nodes_from": {
+          "parameters": {
+            "nodes": "Any"
           },
           "returns": "None",
           "doc": ""

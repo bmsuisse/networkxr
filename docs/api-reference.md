@@ -62,6 +62,8 @@ Initialize self.  See help(type(self)) for accurate signature.
 
 #### `Graph.remove_node(self, n: 'Any') -> 'None'`
 
+#### `Graph.remove_nodes_from(self, nodes: 'Any') -> 'None'`
+
 #### `Graph.size(self, weight: 'str | None' = None) -> 'Any'`
 
 #### `Graph.subgraph(self, nodes: 'Any') -> 'Graph'`
@@ -88,7 +90,7 @@ Initialize self.  See help(type(self)) for accurate signature.
 
 #### `DiGraph.add_edge(self, u_of_edge: 'Any', v_of_edge: 'Any', **attr: 'Any') -> 'None'`
 
-#### `DiGraph.add_edges_from(self, ebunch: 'Any', **attr: 'Any') -> 'None'`
+#### `DiGraph.add_edges_from(self, ebunch_to_add: 'Any', **attr: 'Any') -> 'None'`
 
 #### `DiGraph.add_node(self, node_for_adding: 'Any', **attr: 'Any') -> 'None'`
 
@@ -131,6 +133,8 @@ Initialize self.  See help(type(self)) for accurate signature.
 #### `DiGraph.remove_edge(self, u: 'Any', v: 'Any') -> 'None'`
 
 #### `DiGraph.remove_node(self, n: 'Any') -> 'None'`
+
+#### `DiGraph.remove_nodes_from(self, nodes: 'Any') -> 'None'`
 
 #### `DiGraph.reverse(self, copy: 'bool' = True) -> 'DiGraph'`
 

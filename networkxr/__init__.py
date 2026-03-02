@@ -70,7 +70,7 @@ from networkxr.drawing.layout import circular_layout, spring_layout
 # Utils
 from networkxr.utils.misc import edges_equal, flatten, graphs_equal, nodes_equal, pairwise
 
-__version__ = "0.1.4"
+__version__ = "0.1.5"
 
 __all__ = [
     "DiGraph",

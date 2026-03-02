@@ -11,6 +11,12 @@
 
 By leveraging [PyO3](https://pyo3.rs/) and Rust's performance characteristics, networkXR aims to provide a **fully compatible NetworkX API** with significantly improved speed for compute-intensive graph operations, while remaining a seamless swap for existing Python codebases.
 
+### Why networkXR?
+
+- 🚀 **Blazing Fast**: Core graphs (`Graph`, `DiGraph`) use Rust `IndexMap` internally for high-performance processing.
+- 🤝 **Drop-in Replaceable**: Change your `import networkx as nx` to `import networkxr as nx`. That's it.
+- 🎨 **Batteries Included**: Comes with generators (including fake data), converters, isomorphism checks, and a rich Plotly-native visualization engine.
+
 ## Installation
 
 ```bash
@@ -35,30 +41,43 @@ print(G.number_of_edges())   # 5
 print(list(G.neighbors(1)))  # [2, 3, 4]
 ```
 
-## Plotting
+## Plotting & Visualization
 
-networkXR natively supports **Plotly** for interactive graph visualization:
+networkXR natively supports **Plotly** for interactive, publication-ready graph visualization out-of-the-box (no matplotlib required!).
 
 ```python
 import networkxr as nx
 
+# Create a beautiful graph topology
 G = nx.barbell_graph(5, 1)
-nx.draw(G, node_color="#6366f1", title="Barbell Graph")
-```
 
-Customise layout, colours, and export to HTML:
-
-```python
-G = nx.cycle_graph(12)
-
+# Draw it with custom styling
 fig = nx.draw(
-    G,
-    layout="circular",
-    node_color="#06b6d4",
-    title="Cycle C₁₂",
-    show=False,
+    G, 
+    node_color="#6366f1", 
+    edge_color="#cbd5e1", 
+    title="Barbell Graph Visualization", 
+    show=False
 )
-fig.write_html("graph.html")
+fig.write_html("my_graph.html")
 ```
 
 > **Note:** Plotting requires `plotly` — install with `pip install networkxr[plot]`.
+
+## Rich Data Generation
+
+Need a realistic graph for testing? networkXR includes Faker-powered network generation:
+
+```python
+import networkxr as nx
+
+# Create a realistic social network graph with user attributes
+G = nx.fake_social_network(n=50, p=0.1, seed=42)
+
+for u, data in list(G.nodes(data=True))[:2]:
+    print(f"{data['name']} ({data['email']}) works at {data['company']}")
+```
+
+## Documentation
+
+For full API reference, examples, and cookbooks, check out our [documentation website](https://bmsuisse.github.io/networkXR/).
